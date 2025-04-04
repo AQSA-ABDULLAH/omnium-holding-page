@@ -19,7 +19,7 @@ export default function Hero() {
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
         setFade(true); // Fade in new image
-      }, 1000); // Match fade-out duration
+      }, 1000); // Fade-out duration (1 second)
     }, 10000);
 
     return () => clearInterval(interval);
@@ -32,8 +32,8 @@ export default function Hero() {
         <img
           src={images[currentImageIndex]}
           alt="Logo"
-          className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity duration-1000 ease-in-out ${
-            fade ? "opacity-100" : "opacity-0"
+          className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity ${
+            fade ? "opacity-100 transition-opacity duration-1000" : "opacity-0 transition-opacity duration-1000"
           }`}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
@@ -61,3 +61,4 @@ export default function Hero() {
     </div>
   );
 }
+
