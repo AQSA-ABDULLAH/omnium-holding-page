@@ -44,7 +44,7 @@ export default function Hero() {
         />
       </div>
       {/* Footer */}
-      <div className="absolute bottom-0 w-full flex flex-col-reverse sm:flex-row items-center sm:items-end text-[5px] sm:text-[7px] 3xl:text-[10px] tracking-[1.5px]">
+      <div className="absolute bottom-2 sm:bottom-0 w-full flex flex-col-reverse sm:flex-row items-center sm:items-end text-[5px] sm:text-[7px] 3xl:text-[10px] tracking-[1.5px]">
         {/* Centered text*/}
         <div className="w-full text-center sm:w-auto sm:absolute sm:left-1/2 sm:-translate-x-1/2 pb-[28px] 3xl:pb-[48px]">
           <p>© COPYRIGHT 2025 OMNIUM | ZIMO GROUP LIMITED. ALL RIGHTS RESERVED.</p>
