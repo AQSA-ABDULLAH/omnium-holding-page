@@ -11,6 +11,14 @@ export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
+  // Preload images
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   // Cycle images every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,4 +69,5 @@ export default function Hero() {
     </div>
   );
 }
+
 
