@@ -9,40 +9,37 @@ export default function Hero() {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [loadedImages, setLoadedImages] = useState([]);
+  const [fade, setFade] = useState(true);
 
   // Cycle images every 10 seconds
   useEffect(() => {
-    // Preload images
-    const preloaded = images.map((src) => {
-      const img = new Image();
-      img.src = src;
-      return img;
-    });
-
-    setLoadedImages(preloaded);
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 10000); 
+      setFade(false); // Start fade out
 
-    return () => clearInterval(interval); 
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setFade(true); // Fade in new image
+      }, 500); // Match fade-out duration
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="h-full w-full">
       {/* Centered Logo */}
-      <div className="h-full w-full flex items-center justify-center transition-all duration-1000 ease-in-out">
+      <div className="h-full w-full flex items-center justify-center">
         <img
           src={images[currentImageIndex]}
           alt="Logo"
-          className="w-[200px] sm:w-[293.49px] h-[40px]"
+          className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity duration-1000 ease-in-out ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
         />
       </div>
+
       {/* Footer */}
       <div className="absolute bottom-2 sm:bottom-0 w-full flex flex-col-reverse sm:flex-row items-center sm:items-end text-[5px] sm:text-[7px] 3xl:text-[10px] tracking-[1.5px]">
         {/* Centered text*/}
