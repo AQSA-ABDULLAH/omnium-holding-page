@@ -12,6 +12,15 @@ export default function Hero() {
   const [fade, setFade] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
+  // Load theme everytime when load
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("darkMode");
+    setDarkMode(storedTheme === "true");
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("darkMode", !darkMode);
+  }, [darkMode]);
+
   // Preload images
   useEffect(() => {
     images.forEach((src) => {
@@ -20,37 +29,35 @@ export default function Hero() {
     });
   }, []);
 
-  // Cycle images every 10 seconds
+  // Change image in every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // Start fade out
+      setFade(false);
 
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setFade(true); // Fade in new image
-      }, 1000); // Fade-out duration (1 second)
+        setFade(true);
+      }, 1000);
     }, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className={`h-full w-full ${darkMode ? "bg-black text-white" : "bg-white text-black"}`}>
-      {/* Theme Toggle Button */}
-      <button 
-        onClick={() => setDarkMode(!darkMode)} 
-        className="absolute top-4 right-4 px-4 py-2 bg-gray-600 text-white rounded-md shadow-md hover:bg-gray-500 transition-all"
-      >
-        {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
-      
+    <div
+      className={`h-full w-full ${
+        darkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       {/* Centered Logo */}
       <div className="h-full w-full flex items-center justify-center">
         <img
           src={images[currentImageIndex]}
           alt="Logo"
           className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity ${
-            fade ? "opacity-100 transition-opacity duration-[2000ms]" : "opacity-0 transition-opacity duration-1000"
+            fade
+              ? "opacity-100 transition-opacity duration-[2000ms]"
+              : "opacity-0 transition-opacity duration-1000"
           } ${darkMode ? "invert" : ""}`}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
@@ -61,7 +68,9 @@ export default function Hero() {
       <div className="absolute bottom-2 sm:bottom-0 w-full flex flex-col-reverse sm:flex-row items-center sm:items-end text-[5px] sm:text-[7px] 3xl:text-[10px] tracking-[1.5px]">
         {/* Centered text*/}
         <div className="w-full text-center sm:w-auto sm:absolute sm:left-1/2 sm:-translate-x-1/2 pb-[28px] 3xl:pb-[48px]">
-          <p>© COPYRIGHT 2025 OMNIUM | ZIMO GROUP LIMITED. ALL RIGHTS RESERVED.</p>
+          <p>
+            © COPYRIGHT 2025 OMNIUM | ZIMO GROUP LIMITED. ALL RIGHTS RESERVED.
+          </p>
         </div>
 
         {/* Image at the right corner */}
@@ -69,7 +78,9 @@ export default function Hero() {
           <img
             src="/assets/ZIMO OFFICIAL LICENSED.svg"
             alt="logo"
-            className={`w-[90px] sm:w-[122.31px] h-[28px] ${darkMode ? "invert" : ""}`}
+            className={`w-[90px] sm:w-[122.31px] h-[28px] ${
+              darkMode ? "invert" : ""
+            }`}
             draggable="false"
             onDragStart={(e) => e.preventDefault()}
           />
@@ -78,6 +89,3 @@ export default function Hero() {
     </div>
   );
 }
-
-
-
