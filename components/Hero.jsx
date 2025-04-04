@@ -19,7 +19,7 @@ export default function Hero() {
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
         setFade(true); // Fade in new image
-      }, 500); // Match fade-out duration
+      }, 500); // Start fade-in after fade-out completes
     }, 10000);
 
     return () => clearInterval(interval);
@@ -61,3 +61,4 @@ export default function Hero() {
     </div>
   );
 }
+
