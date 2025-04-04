@@ -10,6 +10,7 @@ export default function Hero() {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   // Preload images
   useEffect(() => {
@@ -34,7 +35,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="h-full w-full">
+    <div className={`h-full w-full ${darkMode ? "bg-black text-white" : "bg-white text-black"}`}>
+      {/* Theme Toggle Button */}
+      <button 
+        onClick={() => setDarkMode(!darkMode)} 
+        className="absolute top-4 right-4 px-4 py-2 bg-gray-600 text-white rounded-md shadow-md hover:bg-gray-500 transition-all"
+      >
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
+      
       {/* Centered Logo */}
       <div className="h-full w-full flex items-center justify-center">
         <img
@@ -42,7 +51,7 @@ export default function Hero() {
           alt="Logo"
           className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity ${
             fade ? "opacity-100 transition-opacity duration-[2000ms]" : "opacity-0 transition-opacity duration-1000"
-          }`}
+          } ${darkMode ? "invert" : ""}`}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
         />
@@ -60,7 +69,7 @@ export default function Hero() {
           <img
             src="/assets/ZIMO OFFICIAL LICENSED.svg"
             alt="logo"
-            className="w-[90px] sm:w-[122.31px] h-[28px]"
+            className={`w-[90px] sm:w-[122.31px] h-[28px] ${darkMode ? "invert" : ""}`}
             draggable="false"
             onDragStart={(e) => e.preventDefault()}
           />
@@ -69,5 +78,6 @@ export default function Hero() {
     </div>
   );
 }
+
 
 
