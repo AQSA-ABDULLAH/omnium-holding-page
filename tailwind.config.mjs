@@ -7,11 +7,20 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        style: ["Microsoft Sans Serif", "sans-serif"], 
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+        "3xl": "1900px", // 1920
+        "4xl": "2500px", // 2560
       },
     },
+
   },
   plugins: [],
 };
