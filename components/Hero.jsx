@@ -33,7 +33,7 @@ export default function Hero() {
           src={images[currentImageIndex]}
           alt="Logo"
           className={`w-[200px] sm:w-[293.49px] h-[40px] transition-opacity ${
-            fade ? "opacity-100 transition-opacity duration-1000" : "opacity-0 transition-opacity duration-1000"
+            fade ? "opacity-100 transition-opacity duration-[2000ms]" : "opacity-0 transition-opacity duration-1000"
           }`}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
